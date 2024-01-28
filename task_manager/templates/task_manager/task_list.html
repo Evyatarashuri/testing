@@ -1,0 +1,38 @@
+<!-- task_manager/templates/task_manager/task_list.html -->
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/task_list.css' %}">
+    <script src="{% static 'js/task_list.js' %}"></script>
+
+</head>
+<body>
+
+    <h1>Task List</h1>
+
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <strong>{{ task.title }}</strong>
+                    <p>{{ task.description }}</p>
+                    <p>Status: {{ task.status }}</p>
+                    <p>Due Date: {{ task.due_date }}</p>
+                    <a href="{% url 'delete_task' task.id %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tasks available.</p>
+    {% endif %}
+
+    <a href="{% url 'create_task' %}">Create Task</a>
+
+</body>
+</html>
